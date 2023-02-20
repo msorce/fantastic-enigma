@@ -1,43 +1,53 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer } from "react";
 import "./App.css";
 import TodoFilter from "./components/Todofilter";
 import Todos from "./components/Todos";
 import TodoContext from "./TodoContext";
-import { TodoItemData } from "./types";
-const App = () => {
-  const [filter, setFilter] = useState("");
-  const [todos, setTodos] = useState<TodoItemData[]>([
-    { todo: "", completed: false, id: "" },
-  ]);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const handleUpdateTodo = (i: string) => {
-    const newTodos = todos.slice();
-    newTodos.forEach((todo) => {
-      const { id } = todo;
-      if (id === i) todo.completed = !todo.completed;
-    });
-    setTodos(newTodos);
-  };
+const TodoReducer = (state: any, action: any) => {
+  switch (action.type) {
+    case "SET_FILTER":
+      return {
+        ...state,
+        filter: action.payload,
+      };
+
+    case "SET_TODOS":
+      return {
+        ...state,
+        todos: action.payload,
+      };
+
+    case "SET_ISLOADING":
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
+
+    default:
+      throw new Error(`No Action ${action.type}`);
+  }
+};
+const App = () => {
+  const [state, dispatch] = useReducer(TodoReducer, {
+    filter: "",
+    todos: [],
+    isLoading: false,
+  });
 
   useEffect(() => {
-    setIsLoading(true);
+    dispatch({ type: "SET_ISLOADING", payload: false });
     fetch("https://dummyjson.com/todos")
       .then((todos) => todos.json())
-      .then(({ todos }) => setTodos(todos))
-      .finally(() => setIsLoading(false));
+      .then(({ todos }) => dispatch({ type: "SET_TODOS", payload: todos }))
+      .finally(() => dispatch({ type: "SET_ISLOADING", payload: false }));
   }, []);
 
   return (
     <TodoContext.Provider
       value={{
-        filter,
-        setFilter,
-        todos,
-        setTodos,
-        isLoading,
-        setIsLoading,
-        handleUpdateTodo,
+        state,
+        dispatch,
       }}
     >
       <div className="App">

@@ -2,13 +2,8 @@ import { createContext } from "react";
 import { globalContext } from "./types";
 
 const TodoContext = createContext<globalContext>({
-  todos: [],
-  setTodos: () => {},
-  isLoading: false,
-  setIsLoading: () => {},
-  filter: "",
-  setFilter: () => {},
-  handleUpdateTodo: () => {},
+  state: { filter: "", todos: [], isLoading: false },
+  dispatch: () => null,
 });
 
 export default TodoContext;
