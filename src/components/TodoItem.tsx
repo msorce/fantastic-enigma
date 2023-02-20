@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { TodoItemData } from "../types";
 import TodoContext from "../TodoContext";
+import { TodoItemData, SET_TODOS } from "../types";
 
 const TodoItem = ({ completed, todo, id }: TodoItemData) => {
   const {
@@ -14,7 +14,7 @@ const TodoItem = ({ completed, todo, id }: TodoItemData) => {
       const { id } = todo;
       if (id === clickedId) todo.completed = !todo.completed;
     });
-    dispatch({ type: "SET_TODOS", payload: newTodos });
+    dispatch({ type: SET_TODOS, payload: newTodos });
   };
 
   return (

@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import TodoContext from "../TodoContext";
+import { SET_FILTER } from "../types";
 const TodoFilter = () => {
   const {
     state: { filter },
@@ -11,7 +12,7 @@ const TodoFilter = () => {
       value={filter}
       placeholder={filter ? filter : "🔎 Search"}
       onChange={(event) =>
-        dispatch({ type: "SET_FILTER", payload: event.target.value })
+        dispatch({ type: SET_FILTER, payload: event.target.value })
       }
     />
   );
