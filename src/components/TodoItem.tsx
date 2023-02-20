@@ -6,10 +6,10 @@ const TodoItem = ({ completed, todo, id, handleUpdateTodo }: TodoItemProps) => (
       type="checkbox"
       checked={completed ? true : false}
       name=""
-      id=""
+      id={id}
       onChange={(e) => handleUpdateTodo(id)}
     />{" "}
-    <span dangerouslySetInnerHTML={{ __html: todo }}></span>
+    <label htmlFor={id} dangerouslySetInnerHTML={{ __html: todo }}></label>
   </li>
 );
 export default TodoItem;
