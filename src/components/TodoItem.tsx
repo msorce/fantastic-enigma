@@ -1,4 +1,4 @@
-import { TodoItemProps } from "./types";
+import { TodoItemProps } from "../types";
 
 const TodoItem = ({ completed, todo, id, handleUpdateTodo }: TodoItemProps) => (
   <li className={completed ? "completed" : ""}>

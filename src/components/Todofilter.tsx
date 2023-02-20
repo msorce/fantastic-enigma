@@ -1,11 +1,13 @@
-import { TodoFilterProps } from "./types";
-const TodoFilter = ({ filter, onFilterChange }: TodoFilterProps) => {
+import { useContext } from "react";
+import TodoContext from "../TodoContext";
+const TodoFilter = () => {
+  const { filter, setFilter } = useContext(TodoContext);
   return (
     <input
       type="text"
       value={filter}
       placeholder={filter ? filter : "🔎 Search"}
-      onChange={(event) => onFilterChange(event.target.value)}
+      onChange={(event) => setFilter(event.target.value)}
     />
   );
 };
