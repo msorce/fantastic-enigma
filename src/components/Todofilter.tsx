@@ -1,13 +1,18 @@
 import { useContext } from "react";
 import TodoContext from "../TodoContext";
 const TodoFilter = () => {
-  const { filter, setFilter } = useContext(TodoContext);
+  const {
+    state: { filter },
+    dispatch,
+  } = useContext(TodoContext);
   return (
     <input
       type="text"
       value={filter}
       placeholder={filter ? filter : "🔎 Search"}
-      onChange={(event) => setFilter(event.target.value)}
+      onChange={(event) =>
+        dispatch({ type: "SET_FILTER", payload: event.target.value })
+      }
     />
   );
 };

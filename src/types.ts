@@ -1,20 +1,18 @@
+import React from "react";
+
 export interface TodoItemData {
   completed: boolean;
   todo: string;
   id: string;
 }
-export interface globalContext {
-  setTodos: any;
-  isLoading: boolean;
-  setIsLoading: any;
+export interface state {
   filter: string;
-  setFilter: any;
   todos: Array<TodoItemData>;
-  handleUpdateTodo: (i: string) => void;
+  isLoading: boolean;
 }
-
-export interface TodoItemProps extends TodoItemData {
-  handleUpdateTodo: (i: string) => void;
+export interface globalContext {
+  state: state;
+  dispatch: React.Dispatch<any>;
 }
 
 export interface Filter {
