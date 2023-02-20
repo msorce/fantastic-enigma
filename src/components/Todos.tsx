@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import TodoItem from "./TodoItem";
-import { Filter } from "../types";
 import TodoContext from "../TodoContext";
 const Todos = () => {
   const { todos, filter, handleUpdateTodo, isLoading } =
